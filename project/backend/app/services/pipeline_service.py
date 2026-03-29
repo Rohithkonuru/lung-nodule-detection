@@ -202,7 +202,7 @@ def _analyze_scan_hybrid(file_path: str) -> dict:
             processed_array,
             voxel_spacing_zyx=(1.0, 1.0, 1.0),
             confidence_threshold=max(0.0, float(settings.CONFIDENCE_THRESHOLD)),
-            sample_every_n_slices=2,  # Process every 2nd slice for speed
+            sample_every_n_slices=max(1, int(getattr(settings, "DETECTION_SAMPLE_EVERY_N_SLICES", 1))),
             disable_filters=bool(settings.DISABLE_FILTERS_FOR_TESTING),
             debug_mid_conf_only=bool(getattr(settings, "DEBUG_MID_CONF_ONLY", False)),
             use_lung_mask=bool(getattr(settings, "USE_LUNG_MASK", False)),

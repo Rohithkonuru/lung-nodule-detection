@@ -4,8 +4,8 @@ import { MainLayout } from '../components/layout/MainLayout';
 import { Card, Badge, Alert, LoadingSkeleton, Spinner } from '../components/common/UI';
 import AnimatedButton from '../components/AnimatedButton';
 import Loader from '../components/Loader';
-import { analysisAPI, scanAPI } from '../api/client';
-import { RefreshCw, ScanLine } from 'lucide-react';
+import { analysisAPI, reportAPI, scanAPI } from '../api/client';
+import { FileText, RefreshCw, ScanLine } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -17,6 +17,7 @@ export const ResultsPage = () => {
   const [loading, setLoading] = useState(true);
   const [currentSlice, setCurrentSlice] = useState(0);
   const [reanalyzing, setReanalyzing] = useState(false);
+  const [generatingPdf, setGeneratingPdf] = useState(false);
   const [previewUrl, setPreviewUrl] = useState('');
   const [previewLoading, setPreviewLoading] = useState(false);
   const hasFetchedRef = useRef(false);
@@ -107,6 +108,27 @@ export const ResultsPage = () => {
       toast.error(formatError(error, 'Re-analysis failed'));
     } finally {
       setReanalyzing(false);
+    }
+  };
+
+  const handleGeneratePdf = async () => {
+    setGeneratingPdf(true);
+    try {
+      await reportAPI.generateReport(scanId);
+      const response = await reportAPI.downloadReport(scanId);
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `report_${scanId}.pdf`);
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode.removeChild(link);
+      window.URL.revokeObjectURL(url);
+      toast.success('PDF report generated and downloaded');
+    } catch (error) {
+      toast.error(formatError(error, 'Failed to generate PDF report'));
+    } finally {
+      setGeneratingPdf(false);
     }
   };
 
@@ -277,6 +299,19 @@ export const ResultsPage = () => {
               )}
 
               <Card className="space-y-3">
+                <AnimatedButton className="w-full" onClick={handleGeneratePdf} disabled={generatingPdf}>
+                  {generatingPdf ? (
+                    <>
+                      <Spinner size="sm" />
+                      Generating PDF...
+                    </>
+                  ) : (
+                    <>
+                      <FileText size={18} />
+                      Generate PDF Report
+                    </>
+                  )}
+                </AnimatedButton>
                 <AnimatedButton className="w-full" onClick={() => navigate(`/reports/${scanId}`)}>
                   View Clinical Report
                 </AnimatedButton>
