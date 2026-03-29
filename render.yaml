@@ -28,9 +28,9 @@ services:
           name: lung-postgres
           property: connectionString
       - key: MODEL_WEIGHTS_PATH
-        value: /app/models/retinanet_best.pth
+        value: /app/project/models/retinanet_best.pth
       - key: RETINANET_MODEL_PATH
-        value: /app/models/retinanet_best.pth
+        value: /app/project/models/retinanet_best.pth
       - key: UPLOAD_DIR
         value: /app/backend/uploads/scans
       - key: ENABLE_DOMAIN_GUARD

@@ -16,7 +16,7 @@ RUN python -m pip install --upgrade pip \
 
 # Copy application source and model weights.
 COPY project /app/project
-COPY models /app/models
+COPY project/models /app/project/models
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
