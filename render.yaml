@@ -1,15 +1,12 @@
 services:
   - type: web
     name: lung-backend-api
-    runtime: python
     dockerfilePath: project/backend/Dockerfile.prod
-    buildCommand: pip install --upgrade pip && pip install -r requirements.txt && pip install -r requirements-ml.txt
-    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --proxy-headers
     healthCheckPath: /health
     autoDeploy: true
     disk:
       name: lung-uploads
-      mountPath: /opt/render/project/src/backend/uploads
+      mountPath: /app/backend/uploads
       sizeGB: 10
     envVars:
       - key: APP_ENV
@@ -31,11 +28,11 @@ services:
           name: lung-postgres
           property: connectionString
       - key: MODEL_WEIGHTS_PATH
-        value: /opt/render/project/src/models/retinanet_best.pth
+        value: /app/models/retinanet_best.pth
       - key: RETINANET_MODEL_PATH
-        value: /opt/render/project/src/models/retinanet_best.pth
+        value: /app/models/retinanet_best.pth
       - key: UPLOAD_DIR
-        value: /opt/render/project/src/backend/uploads/scans
+        value: /app/backend/uploads/scans
       - key: ENABLE_DOMAIN_GUARD
         value: True
       - key: DEBUG_PRINT_RAW_OUTPUTS
