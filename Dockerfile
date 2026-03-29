@@ -14,9 +14,8 @@ RUN python -m pip install --upgrade pip \
     && pip install --no-cache-dir -r /app/project/backend/requirements.txt \
     && pip install --no-cache-dir -r /app/project/backend/requirements-ml.txt
 
-# Copy application source and model weights.
+# Copy application source. Model weights can be mounted or provided via env paths.
 COPY project /app/project
-COPY project/models /app/project/models
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
