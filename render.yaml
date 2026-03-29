@@ -2,7 +2,7 @@ services:
   - type: web
     name: lung-backend-api
     runtime: python
-dockerfilePath: backend/Dockerfile.prod
+    dockerfilePath: project/backend/Dockerfile.prod
     buildCommand: pip install --upgrade pip && pip install -r requirements.txt && pip install -r requirements-ml.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --proxy-headers
     healthCheckPath: /health
