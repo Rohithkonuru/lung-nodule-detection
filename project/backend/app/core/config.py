@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     APP_NAME: str = "Lung Nodule Detection API"
     APP_VERSION: str = "1.0.0"
     API_V1_PREFIX: str = "/api/v1"
+    MODEL_PATH: str | None = None
 
     SECRET_KEY: str = Field("dev-only-change-me-please-123456", min_length=24)
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24

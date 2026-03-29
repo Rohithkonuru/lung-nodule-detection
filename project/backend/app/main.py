@@ -29,6 +29,13 @@ def create_app() -> FastAPI:
     )
     app.add_middleware(AuditLogMiddleware)
 
+    # Allow MODEL_PATH as an alias for MODEL_WEIGHTS_PATH + RETINANET_MODEL_PATH
+    if settings.MODEL_PATH:
+        if settings.MODEL_PATH != settings.MODEL_WEIGHTS_PATH:
+            settings.MODEL_WEIGHTS_PATH = settings.MODEL_PATH
+        if settings.MODEL_PATH != settings.RETINANET_MODEL_PATH:
+            settings.RETINANET_MODEL_PATH = settings.MODEL_PATH
+
     @app.get("/health")
     def health():
         return {"status": "ok"}
