@@ -1,0 +1,43 @@
+# Bytecode & caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtualenvs
+venv/
+.venv/
+env/
+
+# DB / Dev data
+*.db
+*.sqlite
+*.sqlite3
+**/backend_dev.db
+
+# Secrets
+.env
+.env.*
+
+# Uploads (dev/test only)
+uploads/
+**/uploads/
+**/scans/
+**/test_*
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Vercel / Deploy
+.vercel/
+
+# Logs
+*.log
+backend_log.txt
+
+# Migrations (local)
+alembic/versions/*.py
+
