@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     SECRET_KEY: str = Field("dev-only-change-me-please-123456", min_length=24)
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24
 
-    DATABASE_URL: str = "sqlite:///backend_dev.db"
+    DATABASE_URL: str = "sqlite:////tmp/backend_dev.db"
 
     CORS_ORIGINS: str = "http://localhost:3000,http://127.0.0.1:3000,http://localhost:3001,http://127.0.0.1:3001"
     UPLOAD_DIR: str = "uploads/scans"
