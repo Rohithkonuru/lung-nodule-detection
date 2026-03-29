@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Jupyter
+.ipynb_checkpoints
+
+# IDEs
+.vscode/
+.idea/
+
+# Data and models
+data/
+data/*
+models/
+models/*
+outputs/
+outputs/*
+
+# Large / binary medical files
+*.mhd
+*.zraw
+
+# Logs and reports
+*.log
+reports/
+
+# PyTorch
+*.pth
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# OneDrive temp
+~$*

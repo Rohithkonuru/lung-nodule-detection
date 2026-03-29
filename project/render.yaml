@@ -1,0 +1,50 @@
+services:
+  - type: web
+    name: lung-backend-api
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt && pip install -r requirements-ml.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --proxy-headers
+    healthCheckPath: /health
+    autoDeploy: true
+    disk:
+      name: lung-uploads
+      mountPath: /opt/render/project/src/backend/uploads
+      sizeGB: 10
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_NAME
+        value: Lung Nodule Detection API
+      - key: APP_VERSION
+        value: 1.0.0
+      - key: API_V1_PREFIX
+        value: /api/v1
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: 1440
+      - key: CORS_ORIGINS
+        sync: false
+      - key: SECRET_KEY
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: lung-postgres
+          property: connectionString
+      - key: MODEL_WEIGHTS_PATH
+        value: /opt/render/project/src/models/retinanet_best.pth
+      - key: RETINANET_MODEL_PATH
+        value: /opt/render/project/src/models/retinanet_best.pth
+      - key: UPLOAD_DIR
+        value: /opt/render/project/src/backend/uploads/scans
+      - key: ENABLE_DOMAIN_GUARD
+        value: True
+      - key: DEBUG_PRINT_RAW_OUTPUTS
+        value: False
+      - key: PRINT_DEBUG_COUNTS
+        value: False
+
+databases:
+  - name: lung-postgres
+    plan: starter
+    databaseName: lungdb
+    user: lung

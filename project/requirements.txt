@@ -1,0 +1,14 @@
+numpy==2.4.0
+pandas
+matplotlib
+opencv-python
+SimpleITK
+torch==2.1.0
+torchvision==0.16.0
+scikit-learn
+tqdm
+Flask
+Flask-CORS
+PyJWT
+Pillow
+requests

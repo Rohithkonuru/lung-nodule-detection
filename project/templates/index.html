@@ -1,0 +1,74 @@
+{% extends 'layout.html' %}
+{% block title %}Analyze CT Scans - Lung Nodule AI{% endblock %}
+{% block body %}
+<nav class="navbar">
+  <div class="navbar-container">
+    <div class="navbar-brand">🫁 Lung Nodule AI</div>
+    <div class="navbar-menu">
+      {% if user %}
+        <span style="color: var(--text-secondary); font-size: 0.9rem;">{{ user.name }}</span>
+        <a class="btn btn-secondary" href="/dashboard">Dashboard</a>
+        <a class="btn btn-secondary" href="/logout">Logout</a>
+      {% else %}
+        <a class="btn btn-primary" href="/login">Login</a>
+        <a class="btn btn-secondary" href="/register">Register</a>
+      {% endif %}
+    </div>
+  </div>
+</nav>
+
+<div class="analysis-container">
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for msg in messages %}
+        <div class="alert alert-warning">{{ msg }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <div class="analysis-form">
+    <h1 style="margin-bottom: 30px; font-size: 2rem; color: var(--text-primary);">CT Scan Analysis</h1>
+    
+    <form action="/analyze" method="post" enctype="multipart/form-data">
+      <div class="form-section">
+        <div class="form-section-title">📤 Upload Input</div>
+        
+        <div class="form-group">
+          <label>Image URL (optional)</label>
+          <input type="text" name="url" placeholder="Paste image URL from Google Images...">
+        </div>
+        
+        <div class="form-group">
+          <label>Or upload CT Scan / Image</label>
+          <input type="file" name="file" accept=".mhd,.png,.jpg,.jpeg" required>
+          <small style="color: var(--text-secondary); display: block; margin-top: 6px;">
+            Supported: .mhd (CT), .png, .jpg, .jpeg
+          </small>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">Patient Information</div>
+        <div class="form-group">
+          <label for="age">Age</label>
+          <input type="number" name="age" id="age" min="0" max="120" placeholder="Enter your age" required>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">🤖 Model Selection</div>
+        <div class="form-group">
+          <label>Choose Model</label>
+          <select name="model">
+            {% for m in models %}
+            <option value="{{m}}">{{m}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="margin-top: 20px; padding: 14px; font-size: 1rem;">Analyze Scan</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

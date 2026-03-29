@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+{% block title %}Dashboard - Lung Nodule AI{% endblock %}
+{% block body %}
+<nav class="navbar">
+  <div class="navbar-container">
+    <div class="navbar-brand">🫁 Lung Nodule AI</div>
+    <div class="navbar-menu">
+      <a class="btn btn-primary" href="/">New Analysis</a>
+      <a class="btn btn-secondary" href="/logout">Logout</a>
+    </div>
+  </div>
+</nav>
+
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h2>Your Dashboard</h2>
+    <p>Welcome back, <strong>{{ user.name }}</strong> ({{ user.email }})</p>
+  </div>
+
+  {% if scans %}
+    <div class="card">
+      <div class="card-header">📋 Analysis History</div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>File Name</th>
+            <th>Uploaded Date</th>
+            <th>Preview</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for s in scans %}
+            <tr>
+              <td>#{{ s.id }}</td>
+              <td>{{ s.file_name }}</td>
+              <td>{{ s.upload_date.strftime('%Y-%m-%d %H:%M') if s.upload_date else 'N/A' }}</td>
+              <td>
+                {% if s.file_name %}
+                  <img src="/outputs/predictions/{{ s.file_name }}" style="max-height: 60px; border-radius: 4px;" alt="Scan preview" />
+                {% else %}
+                  <span style="color: var(--text-secondary);">No preview</span>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="card">
+      <div style="text-align: center; padding: 40px 20px;">
+        <div style="font-size: 60px; margin-bottom: 20px;">📁</div>
+        <h3>No scans yet</h3>
+        <p style="color: var(--text-secondary); margin: 10px 0 20px 0;">Start by uploading your first CT scan for analysis.</p>
+        <a href="/" class="btn btn-primary" style="max-width: 200px;">Analyze Now</a>
+      </div>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: dark;
+  --apple-bg: #0f172a;
+  --apple-surface: #111827;
+  --apple-surface-soft: #0b1220;
+  --apple-border: #1f2937;
+  --apple-text: #ffffff;
+  --apple-muted: #9ca3af;
+  --apple-shadow: 0 8px 24px rgba(2, 6, 23, 0.22);
+}
+
+body {
+  @apply bg-[#0f172a] text-white;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  color: var(--apple-text);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-white text-black px-5 py-2 rounded-xl font-medium shadow-md hover:bg-gray-200 hover:scale-105 transition duration-200;
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2 rounded-xl font-medium border transition-all duration-200;
+    background: #111827;
+    color: #ffffff;
+    border-color: #374151;
+  }
+
+  .btn-danger {
+    @apply px-4 py-2 rounded-xl font-medium text-white bg-red-500 hover:bg-red-400 transition-all duration-200;
+  }
+
+  .card {
+    background: #111827;
+    border: 1px solid #1f2937;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 14px 24px rgba(2, 6, 23, 0.24);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 18px 34px rgba(2, 6, 23, 0.3);
+  }
+
+  .card-hover {
+    @apply cursor-pointer;
+    background: #111827;
+    border: 1px solid #1f2937;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 14px 24px rgba(2, 6, 23, 0.24);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 18px 34px rgba(2, 6, 23, 0.3);
+  }
+
+  .btn-apple {
+    @apply bg-white text-black font-medium;
+    padding: 10px 18px;
+    border-radius: 999px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0 10px 24px rgba(148, 163, 184, 0.15);
+  }
+
+  .btn-apple:hover {
+    transform: scale(1.05);
+    background-color: #f3f4f6;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-2 rounded-xl border focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent;
+    background: #0b1220;
+    border-color: #374151;
+    color: #ffffff;
+  }
+
+  .label-text {
+    @apply block text-sm font-medium mb-2;
+    color: var(--apple-muted);
+  }
+}
+
+.glass {
+  background: var(--apple-surface);
+  border: 1px solid var(--apple-border);
+  box-shadow: var(--apple-shadow);
+}
+
+.premium-btn {
+  position: relative;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: rgba(55, 65, 81, 0.4);
+  }
+  100% {
+    background-color: rgba(75, 85, 99, 0.7);
+  }
+}
+
+.skeleton {
+  animation: skeleton-loading 1s infinite alternate;
+}
+
+.page-enter {
+  animation: pageEnter 0.3s ease-out;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeInUp 0.35s ease-out;
+}
