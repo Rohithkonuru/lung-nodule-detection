@@ -217,7 +217,7 @@ def _analyze_scan_hybrid(file_path: str) -> dict:
             top_k_detections_per_slice=max(0, int(getattr(settings, "TOP_K_2D_DETECTIONS", 3))),
             debug_print_raw_outputs=bool(getattr(settings, "DEBUG_PRINT_RAW_OUTPUTS", True)),
             print_debug_counts=bool(getattr(settings, "PRINT_DEBUG_COUNTS", True)),
-            fallback_to_raw_if_empty=bool(getattr(settings, "FALLBACK_TO_RAW_IF_EMPTY", True)),
+            fallback_to_raw_if_empty=True,
             max_raw_fallback_detections=int(getattr(settings, "MAX_RAW_FALLBACK_DETECTIONS", 10)),
         )
         
