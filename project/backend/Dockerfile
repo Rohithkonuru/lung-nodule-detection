@@ -7,7 +7,9 @@ ENV PYTHONPATH=/app
 WORKDIR /app
 
 COPY requirements.txt /app/requirements.txt
-RUN pip install --no-cache-dir -r /app/requirements.txt
+COPY requirements-ml.txt /app/requirements-ml.txt
+RUN pip install --no-cache-dir -r /app/requirements.txt \
+	&& pip install --no-cache-dir --index-url https://download.pytorch.org/whl/cpu -r /app/requirements-ml.txt
 
 COPY . /app
 
