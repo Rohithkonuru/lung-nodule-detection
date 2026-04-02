@@ -1,2 +1,0 @@
-run = "python run_server.py"
-entrypoint = "run_server.py"

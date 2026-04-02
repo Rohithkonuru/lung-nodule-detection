@@ -1,6 +1,6 @@
 {
 	"name": "lung-nodule-detection-ui",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Modern web UI for Lung Nodule Detection and Clinical Reporting System",
 	"private": true,
 	"type": "module",

@@ -1,0 +1,2 @@
+run = "pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu && pip install -r project/backend/requirements.txt && pip install -r project/backend/requirements-ml.txt && cd project/backend && python run_server.py"
+entrypoint = "project/backend/run_server.py"

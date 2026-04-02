@@ -1,6 +1,14 @@
 import os
 import sys
+from pathlib import Path
 
-sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+# Add the backend directory to Python path
+backend_dir = Path(__file__).parent.parent
+sys.path.insert(0, str(backend_dir))
 
-from app.main import app
+# Import the Flask app
+from app import app
+
+# Vercel serverless handler
+def handler(event, context):
+    return app
