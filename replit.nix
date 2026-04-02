@@ -5,5 +5,6 @@
     pkgs.glib
     pkgs.libGL
     pkgs.postgresql
+    pkgs.wget
   ];
 }
