@@ -6,5 +6,6 @@
     pkgs.libGL
     pkgs.postgresql
     pkgs.wget
+    pkgs.nodejs
   ];
 }
