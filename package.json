@@ -1,0 +1,9 @@
+{
+  "name": "lung-nodule-detection-proxy",
+  "version": "1.0.0",
+  "scripts": {
+    "install": "cd project/frontend && npm install",
+    "build": "cd project/frontend && npm run build",
+    "start": "cd project/frontend && npm run preview"
+  }
+}
