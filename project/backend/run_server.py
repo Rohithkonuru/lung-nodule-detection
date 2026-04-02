@@ -27,7 +27,7 @@ except Exception as e:
     sys.exit(1)
 
 # Find available port
-def find_available_port(preferred: int = 8001) -> int:
+def find_available_port(preferred: int = 8000) -> int:
     """Find available port, starting with preferred."""
     for port in [preferred, preferred + 1, preferred + 10, preferred + 100]:
         try:
@@ -39,7 +39,9 @@ def find_available_port(preferred: int = 8001) -> int:
             continue
     raise RuntimeError("No available ports found")
 
-port = find_available_port(8001)
+env_port = os.environ.get("PORT")
+preferred_port = int(env_port) if env_port else 8001
+port = find_available_port(preferred_port)
 print(f"\n✓ Using port: {port}")
 
 # Start uvicorn
