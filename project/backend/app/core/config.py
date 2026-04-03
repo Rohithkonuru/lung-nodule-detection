@@ -20,7 +20,7 @@ class Settings(BaseSettings):
     MODEL_WEIGHTS_PATH: str = "models/finetuned/retinanet_lung_best.pth"
     DETECTOR_TYPE: str = "hybrid"  # Using hybrid 2D RetinaNet with proper deduplication
     RETINANET_MODEL_PATH: str = "models/finetuned/retinanet_lung_best.pth"
-    CONFIDENCE_THRESHOLD: float = 0.015  # Even lower for micronodule sensitivity
+    CONFIDENCE_THRESHOLD: float = 0.45  # Increased to prevent worse/noisy detections
     # NOTE: Model needs LUNA16 fine-tuning for proper accuracy. See training/README.md
     DISABLE_FILTERS_FOR_TESTING: bool = False  # If True, bypass all filters regardless of individual toggles
     USE_LUNG_MASK: bool = True
